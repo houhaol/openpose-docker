@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/cwaffles/openpose
-FROM nvidia/cuda:11.4.0-cudnn8-devel-ubuntu18.04
+FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu18.04
 
 #get deps
 RUN apt-get update && \
@@ -23,5 +23,5 @@ RUN git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git .
 
 #build it
 WORKDIR /openpose/build
-RUN cmake -DBUILD_PYTHON=ON .. && make -j `nproc`
+RUN cmake -DBUILD_PYTHON=ON -DUSE_CUDNN=OFF .. && make -j `nproc`
 WORKDIR /openpose
